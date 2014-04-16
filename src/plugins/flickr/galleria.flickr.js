@@ -63,10 +63,15 @@ Galleria.Flickr.prototype = {
         @returns Instance
     */
 
-    search: function( phrase, callback ) {
-        return this._find({
-            text: phrase
-        }, callback );
+    search: function( phrase, callback, params ) {
+      
+        params = $.extend({
+            text: phrase,
+            per_page: Math.min( this.options.max, 500 ),
+            page: 0
+        }, params );
+      
+        return this._find(params, callback );
     },
 
     /**
@@ -206,6 +211,8 @@ Galleria.Flickr.prototype = {
         $.each(params, function( key, value ) {
             url += '&' + key + '=' + value;
         });
+
+        console.log(url);
 
         $.getJSON(url, function(data) {
             if ( data.stat === 'ok' ) {
