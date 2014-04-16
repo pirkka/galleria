@@ -114,11 +114,14 @@ Galleria.Flickr.prototype = {
         @returns Instance
     */
 
-    set: function( photoset_id, callback ) {
-        return this._find({
+    set: function( photoset_id, callback, params ) {
+        params = $.extend({
+            method: 'flickr.photosets.getPhotos',
             photoset_id: photoset_id,
-            method: 'flickr.photosets.getPhotos'
-        }, callback);
+            per_page: Math.min( this.options.max, 500 ),
+            page: 0
+        }, params );
+        return this._find(params, callback);
     },
 
     /**
