@@ -252,7 +252,9 @@ Galleria.Flickr.prototype = {
 
         var img;
 
+
         switch(size) {
+          
 
             case 'thumb':
                 img = photo.url_t;
@@ -260,6 +262,10 @@ Galleria.Flickr.prototype = {
 
             case 'small':
                 img = photo.url_s;
+                break;
+
+            case 'medium':
+                img = photo.url_s.replace('_m.', '_n.'); // https://www.flickr.com/services/api/misc.urls.html
                 break;
 
             case 'big':
