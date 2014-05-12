@@ -291,6 +291,9 @@ Galleria.Flickr.prototype = {
 
         return this._call( params, function(data) {
 
+            // hack to return the pages
+            pages = data.photoset.pages;
+
             var gallery = [],
                 photos = data.photos ? data.photos.photo : data.photoset.photo,
                 len = photos.length,
@@ -310,7 +313,7 @@ Galleria.Flickr.prototype = {
                     link: this.options.backlink ? 'http://flickr.com/photos/' + photo.owner + '/' + photo.id : ''
                 });
             }
-            callback.call( this, gallery );
+            callback.call( this, gallery, pages );
         });
     }
 };
