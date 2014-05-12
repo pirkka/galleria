@@ -64,9 +64,13 @@ Galleria.Flickr.prototype = {
     */
 
     search: function( phrase, callback, params ) {
+          
+        // funnily enough, this plugin does not urlencode the query to the flickr server... here we encode one component of the url, the search term
+        // if urlencoding is added later on to the plugin, things might break :)
+        var urlEncodedPhrase = encodeURIComponent(phrase);
       
         params = $.extend({
-            text: phrase,
+            text: urlEncodedPhrase,
             per_page: Math.min( this.options.max, 500 ),
             page: 0
         }, params );
