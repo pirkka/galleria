@@ -298,7 +298,7 @@ Galleria.Flickr.prototype = {
         return this._call( params, function(data) {
 
             // hack to return the pages
-            pages = data.photoset.pages;
+            var pages = data.photos ? data.photos.pages : data.photoset.pages;
 
             var gallery = [],
                 photos = data.photos ? data.photos.photo : data.photoset.photo,
