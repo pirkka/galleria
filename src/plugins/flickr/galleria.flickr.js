@@ -297,13 +297,8 @@ Galleria.Flickr.prototype = {
 
         return this._call( params, function(data) {
 
-            // hack to return the pages
-            var pages = data.photos ? data.photos.pages : data.photoset.pages;
-
-            // superhack to set the global pages
-            if(GIO!==undefined) {
-              GIO.pages = pages;
-            }
+            // hack to return the pages and inject it to GLOBAL scope :o
+            pages = data.photos ? data.photos.pages : data.photoset.pages;
 
             console.log('--- pages: ' + pages);
 
