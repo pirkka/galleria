@@ -300,6 +300,13 @@ Galleria.Flickr.prototype = {
             // hack to return the pages
             var pages = data.photos ? data.photos.pages : data.photoset.pages;
 
+            // superhack to set the global pages
+            if(GIO!==undefined) {
+              GIO.pages = pages;
+            }
+
+            console.log('--- pages: ' + pages);
+
             var gallery = [],
                 photos = data.photos ? data.photos.photo : data.photoset.photo,
                 len = photos.length,
